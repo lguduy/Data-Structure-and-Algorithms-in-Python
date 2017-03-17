@@ -10,7 +10,7 @@ Created on 2017/02/27 21:12
 
 实现最简单的单链表
 
-通过测试
+插入排序？？？
 """
 
 
@@ -31,10 +31,10 @@ class LinkedListUnderflow(ValueError):
 
 
 class LList(object):
-    """在节点类的基础上定义单链表类"""
+    """定义单链表类"""
     def __init__(self):
         """初始化方法"""
-        self._head = None            # 表头指针
+        self._head = None          # 表头指针
 
     def is_empty(self):
         """链表是否为空"""
@@ -77,7 +77,8 @@ class LList(object):
 
     def find_node(self, k):
         """按下标查找相应节点
-        K: 输入下标
+        内部方法
+        k: 输入下标
         """
         length = self.length()
         if k > length-1 or k < 0:
@@ -93,7 +94,7 @@ class LList(object):
 
     def find_index(self, k):
         """按下标查找元素，并返回元素值
-        K: 输入下标
+        k: 输入下标
         """
         p = self.find_node(k)
         return p.elem
@@ -199,6 +200,42 @@ class LList(object):
 
             return elem
 
+    def reverse(self):
+        """单链表反转
+        把节点的链接反转
+        """
+        q = None
+        while self._head is not None:
+            p = self._head  # 扫描指针
+            self._head = p.next
+            p.next = q
+            q = p
+        self._head = q
+
+    def sort(self):
+        """插入排序（升序）"""
+        # 空表或只有一个元素
+        if self._head is None or self._head.next is None:
+            return
+
+        rem = self._head.next    # 扫描指针
+        self._head.next = None    # 这一步？？？
+        while rem is not None:
+            p = self._head
+            q = None
+            while p.elem <= rem.elem and p is not None:
+                q = p    # 要插入的位置的前一个位置
+                p = p.next   # 确定元素要插入的位置
+
+            if q is None:    # p = self._head, q = None, rem插入到表头
+                self._head = rem
+            else:
+                q.next = rem    # rem插入到p和q之间
+
+            a = rem
+            rem = rem.next
+            a.next = p
+
     def elems(self):
         """定义链表元素迭代器"""
         p = self._head
@@ -254,3 +291,21 @@ if __name__ == "__main__":
     print llist.is_empty()
     llist.clear()
     print llist.is_empty()
+
+    for i in xrange(10):
+        llist.pre_insert(i)
+    llist.printall()
+    print "\n"
+    # reverse
+    llist.reverse()
+    llist.printall()
+    llist.clear()
+
+    # sort
+    llist.pre_insert(10)
+    llist.pre_insert(20)
+    llist.pre_insert(30)
+    llist.printall()
+    print "\n"
+    llist.sort()
+    llist.printall()
