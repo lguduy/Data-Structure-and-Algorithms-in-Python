@@ -29,7 +29,7 @@ class LList1(LList):
         self._rear = None    # 初始化尾节点引用域（表尾指针）
 
     def pre_insert(self, elem):
-        """重新定义首端插入方法
+        """重新定义首端插入
         表尾指针也要修改
         """
         if self._head is None:    # 空表
