@@ -11,7 +11,7 @@ Created on 2017/03/11 21:20
 
 """
 
-# 基于顺序表 
+# 基于顺序表
 def Josephus(n, k, m):
     """
     parameters:

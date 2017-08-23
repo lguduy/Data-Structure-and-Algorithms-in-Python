@@ -29,7 +29,6 @@ class LinkedListUnderflow(ValueError):
     """定义异常类"""
     pass
 
-
 class LList(object):
     """定义单链表类"""
     def __init__(self):
